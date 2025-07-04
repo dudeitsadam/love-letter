@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Love Letter</title>
+  <style>
+    body {
+      background: #ffe6f0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    #envelope {
+      width: 80vw;
+      max-width: 300px;
+      aspect-ratio: 4 / 3;
+      background: url('envelope.png') no-repeat center/cover;
+      transition: opacity 0.8s ease-in-out;
+    }
+
+    #envelope.fade-out {
+      opacity: 0;
+    }
+
+    #envelope.fade-in {
+      opacity: 1;
+    }
+
+    #letter {
+      position: absolute;
+      top: 10%;
+      background: white;
+      padding: 5vw;
+      width: 85vw;
+      max-width: 400px;
+      max-height: 70vh;
+      overflow-y: auto;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      z-index: 10;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-30px);
+      transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s;
+      box-sizing: border-box;
+    }
+
+    #letter.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    #openBtn, #closeBtn {
+      margin-top: 6vw;
+      padding: 3vw 6vw;
+      background-color: #ff6699;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 4vw;
+      z-index: 20;
+    }
+
+    #openBtn:hover, #closeBtn:hover {
+      background-color: #ff3366;
+    }
+
+    #closeBtn {
+      margin-top: 4vw;
+    }
+
+    #letter::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #letter::-webkit-scrollbar-thumb {
+      background-color: #ff6699;
+      border-radius: 10px;
+    }
+
+    #letter::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
+
+    @media (min-width: 600px) {
+      #openBtn, #closeBtn {
+        font-size: 16px;
+        padding: 10px 20px;
+      }
+
+      #letter {
+        padding: 20px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="envelope" class="fade-in"></div>
+
+  <div id="letter">
+    <h3 style="margin-top: 0;">Happy Birthday ende Muthkuttyyy 💖</h3>
+    <p>
+      Happy Birthday, ende Muthkuttyyy 💖<br><br>
+
+      I know we may be far apart today, but please know that not even distance could stop me from making you feel special on your big day. From the very first time we talked, I knew you were something else. There's just something about you — the way you laugh, the way you rant about your favorite movies, or how you get sleepy and weird at night. You're my favorite person, my safe space, and honestly, the reason I smile a lot more lately.<br><br>
+
+      Today, I just want you to know how incredibly grateful I am for you. I’m grateful for your patience when I’m moody, for your voice notes that make everything okay, and for your love even when I least deserve it. You’ve become such an important part of my day, and without you, even my favorite songs sound kinda empty. I know I say this often, but I really mean it — you’re one of the best things to ever happen to me.<br><br>
+
+      I wish I could be there to hold your hand, look into your eyes, and give you a gift wrapped in shiny paper. But until that day comes, I hope this small gesture makes you smile. Close your eyes and imagine me giving you a tight hug right now. The kind of hug that says, “I got you,” and “I’m not going anywhere.” Because I won’t. Not today, not tomorrow, not even when we have silly arguments about food or movies. You're stuck with me. 😌<br><br>
+
+      I sometimes imagine all the things we’ll do once we’re in the same city. Watching sunsets together, sharing fries even though I said I didn’t want any, you stealing my hoodie and never giving it back, dancing around the kitchen, or just napping next to each other in peaceful silence. It may all sound simple, but with you, even silence feels full.<br><br>
+
+      You deserve all the love in the world, all the silly kisses, all the warm hugs, and every good thing life has to offer. You’re kind, thoughtful, and beautiful in ways words can’t describe. And if I have one wish for your birthday, it’s that you never forget how loved you are — by me, and by everyone lucky enough to know you.<br><br>
+
+      So here’s to you — to your smile, your strength, your heart, and your weird sense of humor. To the moments we've had and the countless more ahead. Happy Birthday, love. I hope this letter finds you grinning like the cute goofball you are.<br><br>
+
+      Forever yours,<br>
+      – [Your Nickname]
+    </p>
+    <button id="closeBtn">Close</button>
+  </div>
+
+  <button id="openBtn">Open</button>
+<audio id="bgMusic" src="Kannil.mp3" preload="auto"></audio>
+
+
+  <script>
+  const openBtn = document.getElementById('openBtn');
+  const closeBtn = document.getElementById('closeBtn');
+  const letter = document.getElementById('letter');
+  const envelope = document.getElementById('envelope');
+  const bgMusic = document.getElementById('bgMusic');
+
+  openBtn.addEventListener('click', () => {
+    envelope.classList.add('fade-out');
+    envelope.classList.remove('fade-in');
+
+    setTimeout(() => {
+      letter.classList.add('show');
+    }, 600);
+
+    openBtn.style.display = 'none';
+
+    // Play music
+    bgMusic.currentTime = 0;
+    bgMusic.play().catch(err => {
+      console.log("Autoplay failed:", err);
+    });
+  });
+
+  closeBtn.addEventListener('click', () => {
+    letter.classList.remove('show');
+    envelope.classList.remove('fade-out');
+    envelope.classList.add('fade-in');
+
+    setTimeout(() => {
+      openBtn.style.display = 'inline-block';
+    }, 600);
+
+    // Pause music
+    bgMusic.pause();
+  });
+</script>
+
+
+</body>
+</html>
